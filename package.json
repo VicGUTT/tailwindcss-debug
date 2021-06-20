@@ -1,0 +1,109 @@
+{
+    "name": "@vicgutt/tailwindcss-debug",
+    "version": "0.0.0",
+    "description": "A set of debugging helpers for any TailwindCSS project",
+    "author": "Victor GUTT <guttvictor@yahoo.fr> (https://victorgutt.dev)",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "keywords": [
+        "tailwindcss",
+        "tailwind",
+        "tailwind-plugin",
+        "plugin",
+        "debug",
+        "helper"
+    ],
+    "scripts": {
+        "start": "tsdx watch",
+        "watch": "tsdx watch",
+        "build": "tsdx build",
+        "prod": "tsdx build",
+        "prepare": "tsdx build",
+        "------------------------------------- | TEST | -------------------------------------": "",
+        "test": "tsdx test",
+        "test:clear": "tsdx test --clearCache",
+        "test:watch": "tsdx test --watch",
+        "test:watch:plugins": "tsdx test --watch --testPathPattern=plugins/*",
+        "test:watch:screens": "tsdx test --watch --testPathPattern=screens.test.ts",
+        "test:watch:outlines": "tsdx test --watch --testPathPattern=outlines.test.ts",
+        "test:watch:index": "tsdx test --watch --testPathPattern=index.test.ts",
+        "test:coverage": "tsdx test --coverage",
+        "------------------------------------- | LINT | -------------------------------------": "",
+        "lint": "tsdx lint",
+        "fix": "tsdx lint --fix",
+        "fix:src": "tsdx lint src --fix",
+        "fix:tests": "tsdx lint tests --fix",
+        "------------------------------------- | PUBL | -------------------------------------": "",
+        "release": "np",
+        "release:preview": "np --preview",
+        "------------------------------------- | MISC | -------------------------------------": "",
+        "size": "size-limit",
+        "analyze": "size-limit --why"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^4.12.0",
+        "@types/tailwindcss": "^2.0.6",
+        "husky": "^6.0.0",
+        "jest-matcher-css": "^1.1.0",
+        "np": "^7.5.0",
+        "postcss": "^8.3.5",
+        "size-limit": "^4.12.0",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.0",
+        "typescript": "^4.3.4"
+    },
+    "dependencies": {
+        "tailwindcss": "^2.2.2"
+    },
+    "peerDependencies": {},
+    "files": [
+        "dist",
+        "src"
+    ],
+    "engines": {
+        "node": ">=14"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/VicGUTT/tailwindcss-debug.git"
+    },
+    "bugs": {
+        "url": "https://github.com/VicGUTT/tailwindcss-debug/issues"
+    },
+    "homepage": "https://github.com/VicGUTT/tailwindcss-debug#readme",
+    "husky": {
+        "hooks": {
+            "pre-commit": "tsdx lint"
+        }
+    },
+    "prettier": {
+        "printWidth": 120,
+        "tabWidth": 4,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "as-needed": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "endOfLine": "lf"
+    },
+    "module": "dist/tailwindcss-debug.esm.js",
+    "size-limit": [
+        {
+            "path": "dist/tailwindcss-debug.cjs.production.min.js",
+            "limit": "10 KB"
+        },
+        {
+            "path": "dist/tailwindcss-debug.esm.js",
+            "limit": "10 KB"
+        }
+    ],
+    "np": {
+        "yarn": false
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

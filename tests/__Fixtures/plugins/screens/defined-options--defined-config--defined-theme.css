@@ -1,0 +1,31 @@
+.debug-screen::before {
+    content: '*';
+    padding: 30em;
+    color: red;
+    font-family: 'Yolo';
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #111827;
+    border-top-right-radius: 0.5rem;
+    z-index: 1;
+    top: 0;
+    right: 100%;
+    bottom: 5px
+}
+
+@media (min-width: 10px) {
+    .debug-screen::before {
+        content: "Screen: abc|10px"
+    }
+}
+
+@media (min-width: 777px) {
+    .debug-screen::before {
+        content: "Screen: xyz|777px"
+    }
+}
+
+@media (min-width: 1920px) {
+    .debug-screen::before {
+        content: "Screen: 3xl|1920px"
+    }
+}

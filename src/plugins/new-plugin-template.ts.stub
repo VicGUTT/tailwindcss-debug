@@ -1,0 +1,36 @@
+// @ts-ignore
+import tailwindPlugin from 'tailwindcss/plugin';
+
+export interface Options {
+    enabled: boolean;
+}
+
+const defaultOptions = {
+    enabled: true,
+};
+
+export function factory(options: Options = defaultOptions) {
+    options = { ...defaultOptions, ...options };
+
+    if (!options?.enabled) {
+        return () => {};
+    }
+
+    return function plugin({ addComponents, theme }: { addComponents: Function; theme: Function }) {
+        // @ts-ignore
+        const definedStyles = theme('debug.pluginTemplate', {});
+
+        const components = {
+            //
+        };
+
+        addComponents(components);
+    };
+}
+
+const plugin = tailwindPlugin.withOptions((options: Options = defaultOptions) => {
+    return factory(options);
+});
+
+module.exports.default = plugin;
+export default plugin;
