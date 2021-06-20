@@ -79,7 +79,7 @@ _The Screens plugin is heavily inspired by [tailwindcss-debug-screens](https://g
 _I decided to replicate the feature simply to have better defaults that suits me out of the box._
 
 This plugin adds a small box at the bottom left _(configurable)_ corner of your screen showing you the currently active responsive breakpoint.
-Here's a demo of what it does: [http://play.ailwindcss.com/aaaaaaa](http://play.ailwindcss.com/aaaaaaa).
+Here's a demo of what it does: [https://play.tailwindcss.com/zVpiGgmWbt?file=config](https://play.tailwindcss.com/zVpiGgmWbt?file=config).
 
 #### Usage
 
@@ -142,14 +142,14 @@ To customize the CSS styles of the box, add a `debug.screens` object to your Tai
 };
 ```
 
-Please refer to the [src/plugins/screens.ts](https://github.com/VicGUTT/tailwindcss-debug/src/plugins/screens.ts) file to see all the default styles.
+Please refer to the [src/plugins/screens.ts](https://github.com/VicGUTT/tailwindcss-debug/blob/main/src/plugins/screens.ts) file to see all the default styles.
 
 ### Outlines
 
 _The idea of the Outlines plugin came from [studiometa's debug-outline plugin](https://github.com/studiometa/tailwind-config/blob/509d3c364f98bb96c72c82cce0c9609f8dfe5c16/src/plugins/debug-outline.js) so a big thank you to [@studiometa](https://github.com/studiometa)._
 
 This plugin allows you to visualise your HTML structure by adding colored outlines to elements present in the DOM.
-Here's a demo of what it does: [http://play.ailwindcss.com/aaaaaaa](http://play.ailwindcss.com/aaaaaaa).
+Here's a demo of what it does: [https://play.tailwindcss.com/Hcdj19LvjL?file=config](https://play.tailwindcss.com/Hcdj19LvjL?file=config).
 
 #### Usage
 
@@ -220,7 +220,7 @@ To customize the CSS styles of any element, add a `debug.outlines` object to you
 | tables _(table-caption, table-cell, ...)_ | { min: 270, max: 299 } _(purple - magenta)_       |
 | others                                    | { min: 320, max: 330 } _(magenta'ish - pink'ish)_ |
 
-Please refer to the [src/plugins/outlines.ts](https://github.com/VicGUTT/tailwindcss-debug/src/plugins/outlines.ts) file to see how the default styles are generated.
+Please refer to the [src/plugins/outlines.ts](https://github.com/VicGUTT/tailwindcss-debug/blob/main/src/plugins/outlines.ts) file to see how the default styles are generated.
 
 <!-- ## Changelog
 
