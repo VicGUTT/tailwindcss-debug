@@ -8,8 +8,10 @@ interface options {
     outlines?: boolean | debugOutlinesOptions;
 }
 interface props {
-    addComponents: Function;
-    theme: Function;
+    postcss?: Function,
+    addBase: Function,
+    addComponents: Function,
+    theme: Function,
 }
 
 const index = tailwindPlugin.withOptions((options: options = {}) => {

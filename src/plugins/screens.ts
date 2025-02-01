@@ -38,7 +38,7 @@ export const defaultStyles: Styles = {
 };
 
 interface TailwindPluginParams {
-    postcss: Function,
+    postcss?: Function,
     addBase: Function,
     addComponents: Function,
     theme: Function,
