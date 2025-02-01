@@ -1,6 +1,6 @@
 {
     "name": "@vicgutt/tailwindcss-debug",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "A set of debugging helpers for any TailwindCSS project",
     "author": "Victor GUTT <guttvictor@yahoo.fr> (https://victorgutt.dev)",
     "license": "MIT",
