@@ -37,6 +37,13 @@ export const defaultStyles: Styles = {
     zIndex: 2147483647,
 };
 
+interface TailwindPluginParams {
+    postcss: Function,
+    addBase: Function,
+    addComponents: Function,
+    theme: Function,
+}
+
 /**
  * Heavily inspired by : https://github.com/jorenvanhee/tailwindcss-debug-screens
  */
@@ -47,9 +54,11 @@ export function factory(options: Options = defaultOptions) {
         return () => {};
     }
 
-    return function plugin({ addComponents, theme }: { addComponents: Function, theme: Function }) {
-        const screens: { [key: string]: string } = theme('screens', {});
-        const definedStyles = theme('debug.screens', {});
+    return function plugin(params: TailwindPluginParams) {
+        const isV4Plus = typeof params.postcss === 'undefined';
+
+        const screens: { [key: string]: string } = params.theme('screens', {});
+        const definedStyles = params.theme('debug.screens', {});
         const styles = {
             ...defaultStyles,
             [options.position[0]]: 0,
@@ -59,22 +68,45 @@ export function factory(options: Options = defaultOptions) {
 
         const components = Object
             .entries(screens)
-            .sort(([, valueA], [, valueB]) => +valueA.replace('px', '') - +valueB.replace('px', ''))
-            .reduce((acc: any, [key, value]) => {
-                if (options.ignore.includes(key)) {
+            .filter(([key]) => !key.startsWith('__')) // V4+, excluding: `__CSS_VALUES__: { sm: 4, md: 4, ... }`.
+            .map(([key, value]) => {
+                const [width, unit] = value.split(/([a-zA-Z]+)/).filter((item) => !!item.trim());
+
+                return {
+                    key,
+                    value,
+                    unit,
+                    width: +width,
+                };
+            })
+            .sort((screenA, screenB) => screenA.width - screenB.width)
+            .reduce((acc: any, screen) => {
+                if (options.ignore.includes(screen.key)) {
                     return;
                 }
 
-                acc[`@screen ${key}`] = {
+                const mediaQuery = isV4Plus
+                    ? `@media (width >= ${screen.value})`
+                    : `@screen ${screen.key}`;
+
+                const value = screen.unit === 'rem'
+                    ? `${screen.width}rem · ${screen.width * 16}px`
+                    : screen.value;
+
+                acc[mediaQuery] = {
                     [`${options.selector}::before`]: {
-                        content: `"${options.label.replace('{key}', key).replace('{value}', value)}"`,
+                        content: `"${options.label.replace('{key}', screen.key).replace('{value}', value)}"`,
                     },
                 };
 
                 return acc;
             }, { [`${options.selector}::before`]: styles });
 
-        addComponents(components);
+        if (isV4Plus) {
+            params.addBase(components);
+        } else {
+            params.addComponents(components);
+        }
     };
 };
 
