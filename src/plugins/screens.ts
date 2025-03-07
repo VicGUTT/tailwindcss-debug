@@ -60,7 +60,7 @@ export function factory(options: Options = defaultOptions) {
         const screens: { [key: string]: string } = params.theme('screens', {});
         const definedStyles = params.theme('debug.screens', {});
         const styles = {
-            ...defaultStyles,
+            ...adjustDefaultStylesBorderRadiusBasedOnOptions(defaultStyles, options),
             [options.position[0]]: 0,
             [options.position[1]]: 0,
             ...definedStyles,
@@ -109,6 +109,21 @@ export function factory(options: Options = defaultOptions) {
         }
     };
 };
+
+function adjustDefaultStylesBorderRadiusBasedOnOptions(styles: Styles, options: Options): Styles {
+    const radiusBlockKey = options.position.includes('top') ? 'Bottom' : 'Top';
+    const radiusInlineKey = options.position.includes('left') ? 'Right' : 'Left';
+
+    const _styles = { ...styles };
+
+    delete _styles.borderTopRightRadius;
+
+    return {
+        ..._styles,
+        [`border${radiusBlockKey}${radiusInlineKey}Radius`]: defaultTheme?.borderRadius?.lg,
+    };
+
+}
 
 const plugin = tailwindPlugin.withOptions(
     (options: Options = defaultOptions) => factory(options),
